@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if (mysqli_num_rows($result) == 1) {
         $_SESSION['username'] = $username;
-        header('Location: dashboard.php'); // Redirect to the dashboard after successful login
+        header('Location: member/index.html'); // Redirect to the dashboard after successful login
     } else {
         echo 'Invalid username or password';
     }
