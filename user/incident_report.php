@@ -21,7 +21,7 @@ $location = filter_var($location, FILTER_SANITIZE_STRING);
 $date = filter_var($date, FILTER_SANITIZE_STRING);
 
 // Handle image upload
-$target_dir = "uploads/";
+$target_dir = "../uploads/";
 $target_file = $target_dir . basename($_FILES["image"]["name"]);
 $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 

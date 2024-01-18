@@ -25,11 +25,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     header("Location: user/user-dashboard.php");
                     break;
                 case 'NGO/Gram Panchayat Representative':
-                    header("Location: ngo/ngo_dashboard.php");
+                    header("Location: gmrepre/repre-dashboard.php");
                     break;
-                    case 'Admin':
-                        header("Location: admin/admin-dashboard.php");
-                        break;
+                case 'Admin':
+                    header("Location: admin/admin-dashboard.php");
+                    break;
                 // Add more cases as needed for different roles
                 default:
                     header("Location: default_dashboard.php");
@@ -98,21 +98,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
                                     <form method="post" action="login.php">
-        <div class="form-group">
-            <label for="username">Username:</label>
-            <input type="text" class="form-control" id="username" name="username" required>
-        </div>
+                                        <div class="form-group">
+                                            <label for="username">Username:</label>
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                required>
+                                        </div>
 
-        <div class="form-group">
-            <label for="password">Password:</label>
-            <input type="password" class="form-control" id="password" name="password" required>
-        </div>
+                                        <div class="form-group">
+                                            <label for="password">Password:</label>
+                                            <input type="password" class="form-control" id="password" name="password"
+                                                required>
+                                        </div>
 
-        <button type="submit" class="btn btn-primary">Login</button>
-    </form>
+                                        <button type="submit" class="btn btn-primary">Login</button>
+                                    </form>
                                     <hr>
                                     <div class="text-center">
-                                    <p> Don't have an account? </p>
+                                        <p> Don't have an account? </p>
                                         <a class="small" href="register.php">Create Account</a>
                                     </div>
                                     <div class="text-center">
