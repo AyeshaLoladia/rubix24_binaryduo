@@ -13,8 +13,13 @@
   <link href="images/logo.png" rel="icon">
   <link href="images/logo.png" rel="apple-touch-icon">
 
+  <link href="assets/boxicons.min.css" rel="stylesheet">
+  <link href="assets2/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+  <link href="assets2/vendor/remixicon/remixicon.css" rel="stylesheet">
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
 
   <!-- Vendor CSS Files -->
   <link href="assets2/vendor/aos/aos.css" rel="stylesheet">
@@ -28,7 +33,23 @@
   <!-- Template Main CSS File -->
   <link href="assets2/css/style.css" rel="stylesheet">
 
- 
+ <style>
+
+#language-selector-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    background-color: #f2f2f2;
+    text-align: center;
+}
+
+#language-selector {
+    margin: 0 auto;
+    display: block;
+}
+ </style>
 </head>
 
 <body>
@@ -57,15 +78,58 @@
 
     </div>
   </header><!-- End Header -->
+  <div id="language-selector-container">
+    <select id="language-selector" onchange="changeLanguage()">
+        <option value="en">English</option>
+        <option value="hn">हिंदी</option>
+        <!-- Add more language options as needed -->
+    </select>
+</div>
+
+
+<script>
+  function changeLanguage() {
+      var selectedLanguage = document.getElementById('language-selector').value;
+
+      // Fetch language-specific content
+      fetch('languages/' + selectedLanguage + '.json')
+          .then(response => response.json())
+          .then(data => updateContent(data));
+  }
+
+  function updateContent(languageData) {
+      document.getElementById('text1').textContent = languageData.text1;
+      document.getElementById('text2').textContent = languageData.text2;
+      document.getElementById('text3').textContent = languageData.text3;
+      document.getElementById('text4').textContent = languageData.text4;
+      document.getElementById('text5').textContent = languageData.text5;
+      document.getElementById('text6').textContent = languageData.text6;
+      document.getElementById('text7').textContent = languageData.text7;
+      document.getElementById('text8').textContent = languageData.text8;
+      document.getElementById('text9').textContent = languageData.text9;
+      document.getElementById('text10').textContent = languageData.text10;
+      document.getElementById('text11').textContent = languageData.text11;
+      document.getElementById('text12').textContent = languageData.text12;
+
+      // Update other elements as needed
+
+      // Optional: Store selected language in a cookie or session
+  }
+
+  // Set initial language based on user's preference (optional)
+  // You can retrieve the user's preferred language from cookies, session, or other sources
+  // For simplicity, we'll default to English
+  changeLanguage();
+</script>
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center justify-content-center">
     <div class="container" data-aos="fade-up">
 
       <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="150">
-        <div class="col-xl-6 col-lg-8">
-          <h1>Every Drop Matters<span>.</span></h1>
-          <h2>Join the Journey to Sustainable Water Management</h2>
+        <div class="col-xl-6 col-lg-8 wel">
+          <h1 id="text1">Every Drop Matters<span>.</span></h1>
+          <h2 id="text2">Join the Journey to Sustainable Water Management</h2>
         </div>
       </div>
 
@@ -73,31 +137,31 @@
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-store-line"></i>
-            <h3><a href="">Monitoring and Evaluation</a></h3>
+            <h3 id="text3"><a href="">Monitoring and Evaluation</a></h3>
           </div>
         </div>
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-bar-chart-box-line"></i>
-            <h3><a href="">Education Campaigns</a></h3>
+            <h3 id="text4"><a href="">Education Campaigns</a></h3>
           </div>
         </div>
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-calendar-todo-line"></i>
-            <h3><a href="">Decision Support</a></h3>
+            <h3 id="text5"><a href="">Decision Support</a></h3>
           </div>
         </div>
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-paint-brush-line"></i>
-            <h3><a href="">Multilingual Support</a></h3>
+            <h3 id="text6"><a href="">Multilingual Support</a></h3>
           </div>
         </div>
         <div class="col-xl-2 col-md-4">
           <div class="icon-box">
             <i class="ri-database-2-line"></i>
-            <h3><a href="">Emergency Response</a></h3>
+            <h3 id="text7"><a href="">Emergency Response</a></h3>
           </div>
         </div>
       </div>
@@ -116,16 +180,16 @@
             <img src="assets2/img/about.jpg" class="img-fluid" alt="">
           </div>
           <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 content" data-aos="fade-right" data-aos-delay="100">
-            <h3>Welcome to Blue Catalyst, a groundbreaking initiative dedicated to revolutionizing water supply project management. </h3>
-            <p class="fst-italic">
+            <h3 id="text8">Welcome to Blue Catalyst, a groundbreaking initiative dedicated to revolutionizing water supply project management. </h3>
+            <p class="fst-italic" id="text9">
               At Blue Catalyst, we believe that clean water is not just a resource; it's a fundamental right.
             </p>
             <ul>
-              <li><i class="ri-check-double-line"></i> Utilizes AI and ML for predictive analytics and data-driven insights.</li>
-              <li><i class="ri-check-double-line"></i>Streamlining project planning and mobilization.</li>
-              <li><i class="ri-check-double-line"></i> Offering multilingual support and emergency response protocols.</li>
+              <li id="text10"><i class="ri-check-double-line"></i> Utilizes AI and ML for predictive analytics and data-driven insights.</li>
+              <li id="text11"><i class="ri-check-double-line"></i>Streamlining project planning and mobilization.</li>
+              <li id="text12"><i class="ri-check-double-line"></i> Offering multilingual support and emergency response protocols.</li>
             </ul>
-            <p>
+            <p id="text13">
               Whether you are an NGO, a community member, or a Gram Panchayat representative, Blue Catalyst provides the tools and support you need to make a lasting impact.
             </p>
           </div>

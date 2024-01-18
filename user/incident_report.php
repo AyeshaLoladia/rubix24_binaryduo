@@ -1,7 +1,29 @@
 <?php
 session_start();
 // Include database connection file (db_connection.php)
-include('db_connection.php');
+include('../db_connection.php');
+
+
+
+
+// Check if the admin is logged in
+if (!isset($_SESSION["username"])) {
+    // Redirect to the login page if not logged in
+    header("Location: ../login.php");
+    exit();
+}
+
+
+// Check if the admin is logged in
+if (!isset($_SESSION["profile_picture"])) {
+    // Redirect to the login page if not logged in
+    header("Location: ../login.php");
+    exit();
+}
+
+// Get the admin's username from the session
+$username = $_SESSION["username"];
+$profile_picture = $_SESSION["profile_picture"];
 // Process login form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Get form data
@@ -71,6 +93,9 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <!-- Favicons -->
+    <link href="../images/logo.png" rel="icon">
+    <link href="../images/logo.png" rel="apple-touch-icon">
 
     <title>Incident Report</title>
 
@@ -81,7 +106,7 @@ $conn->close();
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
 
 
@@ -106,7 +131,7 @@ $conn->close();
                 <?php include('topbar.php'); ?>
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid bg-logo">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -115,8 +140,8 @@ $conn->close();
 
                     </div>
 
-                    <div class="row d-flex justify-content-center">
-                        <form action="incident_report.php" method="post" enctype="multipart/form-data">
+                    <div class="row d-flex justify-content-center" >
+                        <form action="incident_report.php" method="post" enctype="multipart/form-data" style="width:80%">
                             <div class="form-group">
                                 <label for="description">Description</label>
                                 <textarea class="form-control" id="description" name="description" rows="3"></textarea>
@@ -134,9 +159,7 @@ $conn->close();
                                 <input type="file" class="form-control-file" id="image" name="image">
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
-                            <div class="alert alert-success">
-        <?php echo $_SESSION['success_message']; ?>
-    </div>
+                          
                         </form>
                     </div>
 

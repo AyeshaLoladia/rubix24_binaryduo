@@ -1,8 +1,27 @@
 <?php
 session_start();
 // Include database connection file (db_connection.php)
-include('db_connection.php');
+include('../db_connection.php');
 
+
+// Check if the admin is logged in
+if (!isset($_SESSION["username"])) {
+    // Redirect to the login page if not logged in
+    header("Location: ../login.php");
+    exit();
+}
+
+
+// Check if the admin is logged in
+if (!isset($_SESSION["profile_picture"])) {
+    // Redirect to the login page if not logged in
+    header("Location: ../login.php");
+    exit();
+}
+
+// Get the admin's username from the session
+$username = $_SESSION["username"];
+$profile_picture = $_SESSION["profile_picture"];
 
 // Close the database connection
 $conn->close();
@@ -21,6 +40,9 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <!-- Favicons -->
+    <link href="../images/logo.png" rel="icon">
+    <link href="../images/logo.png" rel="apple-touch-icon">
 
     <title>Education & Awareness</title>
 
@@ -31,7 +53,7 @@ $conn->close();
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
 
 
@@ -56,7 +78,7 @@ $conn->close();
                 <?php include('topbar.php'); ?>
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid bg-logo">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -141,10 +163,12 @@ $conn->close();
         <!-- Card Body -->
         <div class="card-body">
             <div class="embed-responsive embed-responsive-16by9">
-                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/zDZFcDGpL4U" allowfullscreen></iframe>
+                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/MNyRIuF0sRU?si=3cPy-0AS1UMi_IH9" allowfullscreen></iframe>
             </div>
         </div>
     </div>
+
+  
 
 </div>
 

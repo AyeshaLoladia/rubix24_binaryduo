@@ -36,12 +36,6 @@
         <span>Community Engagement</span></a>
 </li>
 
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Project Updates</span></a>
-</li>
 
 <!-- Nav Item - Tables -->
 <li class="nav-item">
@@ -55,20 +49,6 @@
     <a class="nav-link" href="tables.html">
         <i class="fas fa-fw fa-table"></i>
         <span>Hygiene & Health</span></a>
-</li>
-
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Emergency Preparedness</span></a>
-</li>
-
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Collaboration</span></a>
 </li>
 
 <!-- Nav Item - Tables -->
