@@ -30,24 +30,84 @@
   <link href="assets/css/style.css" rel="stylesheet">
 
 <?php
-
 session_start();
-require('db_connection.php'); // Include your database connection file
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
 
-    $query = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-    $result = mysqli_query($connection, $query);
 
-    if (mysqli_num_rows($result) == 1) {
-        $_SESSION['username'] = $username;
-        header('Location: member/index.html'); // Redirect to the dashboard after successful login
-    } else {
-        echo 'Invalid username or password';
-    }
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  // Database connection parameters
+  $servername = "localhost"; // Your server name
+  $username = "root"; // Your MySQL username
+  $password = ""; // Your MySQL password
+  $dbname = "water_security_db"; // Your database name
+
+  // Get the submitted username and password from the form
+
+
+
+  $user = $_POST["username"];
+  $pass = $_POST["password"];
+
+  // Create a new MySQLi connection
+  $conn = new mysqli($servername, $username, $password, $dbname);
+
+  // Check connection
+  if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
+  }
+
+  // Prepare an SQL statement to select the user's password
+  $sql = "SELECT id,username, password FROM users WHERE username = ? AND password = ?";
+  $stmt = $conn->prepare($sql);
+  $stmt->bind_param("ss", $user, $pass);
+  $stmt->execute();
+  $stmt->store_result();
+
+  // Check if a user with the given username and password exists
+  if ($stmt->num_rows == 1) {
+      // User is authenticated, set the username in the session
+      $_SESSION["username"] = $user;
+      $_SESSION["username"] = $_POST['id'];
+      header("Location: member\index.php"); // Redirect to the dashboard page
+  } else {
+      // User authentication failed, display an error message
+      $login_error = "Invalid username or password";
+  }
+
+  // Close the database connection
+  $stmt->close();
+  $conn->close();
 }
+
+
+// Perform a SELECT query to retrieve data
+$selectQuery = "SELECT id FROM users WHERE username = $userID";
+
+$result = $mysqli->query($selectQuery);
+
+if ($result) {
+    // Fetch the result as an associative array
+    $row = $result->fetch_assoc();
+
+    // Access the selected variables
+    $age = $row['age'];
+    $education = $row['education'];
+    $profilePicture = $row['profile_picture'];
+
+    // Now you can use these variables as needed
+
+    // For example, you might want to display them in your HTML
+    echo "Age: $age<br>";
+    echo "Education: $education<br>";
+    echo "Profile Picture: $profilePicture<br>";
+
+    // Remember to free the result set
+    $result->free();
+} else {
+    // Handle the query error
+    echo "Error: " . $mysqli->error;
+}
+
 
 ?>
 </head>

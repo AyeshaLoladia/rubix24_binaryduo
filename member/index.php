@@ -27,7 +27,18 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+<?php
+session_start(); //
+// Check if the admin is logged in
+if (!isset($_SESSION["username"])) {
+  // Redirect to the login page if not logged in
+  header("Location: login.php");
+  exit();
+}
 
+// Get the admin's username from the session
+$username = $_SESSION["username"];
+?>
 
 </head>
 
@@ -52,10 +63,13 @@
         <i class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="courses.html" class="get-started-btn">Profile</a>
+      <a href="profile.php" class="get-started-btn"><?php echo $username ?></a>
+
 
     </div>
   </header><!-- End Header -->
+
+ 
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex justify-content-center align-items-center">
