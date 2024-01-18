@@ -59,7 +59,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Login</title>
+    <!-- Favicons -->
+  <link href="images/logo.png" rel="icon">
+  <link href="images/logo.png" rel="apple-touch-icon">
+
+    <title>Login</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -72,7 +76,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 </head>
 
-<body style="background-color:#a02929">
+<body style="background-color:#1d3892">
 
     <div class="container">
 
@@ -86,13 +90,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="col-lg-6 d-none d-lg-block "
-                                style="background-image: url('images/somaiya.png'); background-position: center; background-repeat: no-repeat; background-size: contain;">
+                                style="background-image: url('images/logo.png'); background-position: center; background-repeat: no-repeat; background-size: contain;">
                             </div>
 
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                                        <h1 class="h4 text-gray-900 mb-4">Welcome!</h1>
                                     </div>
                                     <form method="post" action="register.php" enctype="multipart/form-data">
                                         <div class="form-group">
@@ -118,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <option value="Community Member">Community Member</option>
                                                 <option value="NGO/Gram Panchayat Representative">NGO/Gram Panchayat
                                                     Representative</option>
-                                                    <option value="Admin">Admin</option>
+                                                   
                                             </select>
                                         </div>
 
@@ -138,8 +142,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <p> Already have an account? </p>
-                                        <a class="small" href="login.php">Login</a>
+                                        <p> Already have an account?  <a class="" href="login.php">Login</a></p>
+                                        
                                     </div>
                                     <div class="text-center">
                                         <p id="message"></p>
@@ -171,3 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </body>
 
 </html>
+
+
+
+

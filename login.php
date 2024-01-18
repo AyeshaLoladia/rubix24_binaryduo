@@ -50,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 
 <!-- Rest of the HTML form remains the same -->
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -61,21 +60,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <!-- Favicons -->
+    <link href="images/logo.png" rel="icon">
+    <link href="images/logo.png" rel="apple-touch-icon">
 
-    <title>Admin Login</title>
+    <title>Login</title>
 
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    
 
     <!-- Custom styles for this template-->
     <link href="assets\css\sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qQXAb2luUW9inWMDVj2NmhHui9/A30j6Y/7 resources/css/font-awesome.min.css" crossorigin="anonymous" />
 
 </head>
 
-<body style="background-color:#a02929">
+<body style="background-color:#1d3892;">
 
     <div class="container">
 
@@ -88,8 +90,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block "
-                                style="background-image: url('images/somaiya.png'); background-position: center; background-repeat: no-repeat; background-size: contain;">
+                            <div class="col-lg-6 d-none d-lg-block" style="background-image: url('images/fulllogo.png'); background-position: center; background-repeat: no-repeat; background-size: contain;">
                             </div>
 
                             <div class="col-lg-6">
@@ -99,23 +100,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                     </div>
                                     <form method="post" action="login.php">
                                         <div class="form-group">
-                                            <label for="username">Username:</label>
-                                            <input type="text" class="form-control" id="username" name="username"
-                                                required>
+                                            <label for="username"><i class="fas fa-user"></i> Username:</label>
+                                            <input type="text" class="form-control" id="username" name="username" required>
                                         </div>
 
                                         <div class="form-group">
-                                            <label for="password">Password:</label>
-                                            <input type="password" class="form-control" id="password" name="password"
-                                                required>
+                                            <label for="password"><i class="fas fa-key"></i> Password:</label>
+                                            <input type="password" class="form-control" id="password" name="password" required>
                                         </div>
 
                                         <button type="submit" class="btn btn-primary">Login</button>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <p> Don't have an account? </p>
-                                        <a class="small" href="register.php">Create Account</a>
+                                        <p> Don't have an account? <a class="" href="register.php"><i class="fas fa-user-plus"></i> Create Account</a></p>
+                                       
                                     </div>
                                     <div class="text-center">
                                         <p id="message"></p>
@@ -132,17 +131,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     </div>
 
-
     <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/vendor/jquery/jquery.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="assets/vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
-
+    <script src="assets/js/sb-admin-2.min.js"></script>
 
 </body>
 
