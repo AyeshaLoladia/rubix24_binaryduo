@@ -19,63 +19,59 @@
 <!-- Divider -->
 <hr class="sidebar-divider">
 
+  <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Project Management</span>
+                </a>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                       
+                        <a class="collapse-item" href="">Project List</a>
+                        <a class="collapse-item" href="">Create Project</a>
+                        <a class="collapse-item" href="">Edit Project</a>
+                    </div>
+                </div>
+            </li>
+
+     <!-- Nav Item - Pages Collapse Menu -->
+  <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Program Management</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                       
+                        <a class="collapse-item" href="#">Educational Programs</a>
+                        <a class="collapse-item" href="#">HealthCare Programs</a>
+                        <a class="collapse-item" href="#">Events</a>
+                    </div>
+                </div>
+            </li>
+            
+            
+           
+
+<!-- Divider -->
+<hr class="sidebar-divider">
 
 
 
+<!-- Nav Item - Tables -->
+<li class="nav-item">
+    <a class="nav-link" href="#">
+        <i class="fas fa-fw fa-table"></i>
+        <span>Announcements</span></a>
+</li>
 <!-- Nav Item - Charts -->
 <li class="nav-item">
-    <a class="nav-link" href="educ.php">
+    <a class="nav-link" href="">
         <i class="fas fa-fw fa-chart-area"></i>
-        <span>Education & Awareness</span></a>
-</li>
-
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="community_forum.php">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Community Engagement</span></a>
-</li>
-
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Project Updates</span></a>
-</li>
-
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="incident_report.php">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Incident Reporting</span></a>
-</li>
-
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Hygiene & Health</span></a>
-</li>
-
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Emergency Preparedness</span></a>
-</li>
-
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Collaboration</span></a>
-</li>
-
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Sustainable Practices</span></a>
+        <span>Community Forum</span></a>
 </li>
 
 <!-- Divider -->
