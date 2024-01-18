@@ -2,6 +2,9 @@
 // Include database connection file (db_connection.php)
 include('db_connection.php');
 
+// Start or resume the session
+session_start();
+
 // Process login form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
@@ -15,9 +18,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['password'])) {
             // Set session variables or any other user-specific data if needed
-            $_SESSION['user_id'] = $row['id'];
+            $_SESSION['user_id'] = $row['user_id'];
             $_SESSION['username'] = $row['username'];
-            $_SESSION['role'] = $row['role']; // Assuming 'role' is a column in your users table
+            $_SESSION['email'] = $row['email'];
+            $_SESSION['contact_details'] = $row['contact_details'];
+            $_SESSION['role'] = $row['role'];
+            $_SESSION['profile_picture'] = $row['profile_picture']; // Assuming 'role' is a column in your users table
 
             // Redirect based on user role
             switch ($_SESSION['role']) {
@@ -48,6 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $conn->close();
 }
 ?>
+
 
 <!-- Rest of the HTML form remains the same -->
 <!DOCTYPE html>

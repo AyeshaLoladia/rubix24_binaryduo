@@ -1,43 +1,59 @@
 <?php
 session_start();
 // Include database connection file (db_connection.php)
-include('../db_connection.php');
+include('db_connection.php');
 
-// Check if the admin is logged in
-if (!isset($_SESSION["username"])) {
-    // Redirect to the login page if not logged in
-    header("Location: ../login.php");
-    exit();
-}
-
-
-// Check if the admin is logged in
-if (!isset($_SESSION["profile_picture"])) {
-    // Redirect to the login page if not logged in
-    header("Location: ../login.php");
-    exit();
-}
-
-// Get the admin's username from the session
-$username = $_SESSION["username"];
-$profile_picture = $_SESSION["profile_picture"];
-
-// Close the database connection
-$conn->close();
 ?>
 
 
 <!DOCTYPE html>
 <html lang="en">
 
-
-
+<style>
+        body {
+            background-color: #f5f5f5;
+        }
+        .card {
+            margin: 1rem 0;
+            border: none;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s;
+        }
+        .card:hover{
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .card-title(
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .card-text(
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        .btn {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.25rem;
+            transition: background-color 0.3s;
+        }
+        .btn:hover(
+            background-color: #0069d9;
+        }
+        .btn-link(
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .btn-link:hover(
+            color: #0069d9;
+        }
+    </style>
 
 
 <head>
-     <!-- Favicons -->
-  <link href="../images/logo.png" rel="icon">
-  <link href="../images/logo.png" rel="apple-touch-icon">
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,7 +61,7 @@ $conn->close();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Representative</title>
+    <title>Community Engagement</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -56,7 +72,7 @@ $conn->close();
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
-   
+
 
 </head>
 
@@ -79,23 +95,45 @@ $conn->close();
                 <?php include('topbar.php'); ?>
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid bg-logo">
+                <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Welcome
-                            <?php echo $username; ?>
+                        <h1 class="h3 mb-0 text-gray-800">Community Engagement
                         </h1>
-                       
+
                     </div>
 
-                    
-                    <div class="row">
- 
+                    <div class="row d-flex justify-content-center">
+                    <form method="POST" action="process_thread.php">
+    <label for="title">Thread Title:</label>
+    <input type="text" name="title" id="title" required>
+
+    <label for="content">Thread Content:</label>
+    <textarea name="content" id="content" rows="4" required></textarea>
+
+    <input type="submit" value="Create Thread">
+</form>
+
+<form method="POST" action="process_reply.php">
+    <textarea name="content" rows="4" required></textarea>
+    <input type="hidden" name="thread_id" value="THREAD_ID_HERE">
+    <input type="submit" value="Post Reply">
+</form>
+
+
+<div class="post">
+    <p>Post content here...</p>
+
+    <?php if ($post['user_id'] === $_SESSION['user_id']): ?>
+        <a href="edit_post.php?post_id=<?php echo $post['post_id']; ?>">Edit</a>
+        <a href="delete_post.php?post_id=<?php echo $post['post_id']; ?>">Delete</a>
+    <?php endif; ?>
+</div>
+                    </div>
 
                 </div>
                 <!-- /.container-fluid -->
-</div>
 
             </div>
             <!-- End of Main Content -->
@@ -135,7 +173,7 @@ $conn->close();
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="../login.php">Logout</a>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
@@ -159,61 +197,6 @@ $conn->close();
     <script src="js/demo/chart-pie-demo.js"></script>
 
 
-    <script>
-    function getLocation() {
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(fetchWeather);
-        } else {
-            console.log("Geolocation is not supported by this browser.");
-        }
-    }
-
-    function fetchWeather(position) {
-    const lat = position.coords.latitude;
-    const lon = position.coords.longitude;
-    const apiKey = "31e3ee80db08af5463e81226fc175207";
-    const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-
-    fetch(url)
-        .then(response => response.json())
-        .then(data => {
-            if (data && data.cod == 200) {
-                const temp = data.main.temp;
-                const description = ucfirst(data.weather[0].description);
-                const locationName = data.name;
-
-                const weatherInfo = document.createElement("div");
-                weatherInfo.classList.add("col-lg-6", "mb-4");
-
-                const weatherCard = document.createElement("div");
-                weatherCard.classList.add("card", "bg-primary-light");
-
-                const weatherCardHeader = document.createElement("div");
-                weatherCardHeader.classList.add("card-header");
-                weatherCardHeader.innerHTML = `<h4 class="card-title text-gray-800">Weather Information for ${locationName}</h4>`;
-
-                const weatherCardBody = document.createElement("div");
-                weatherCardBody.classList.add("card-body");
-                weatherCardBody.innerHTML = `
-                    <p class='card-text'><strong>Temperature:</strong> ${temp}°C</p>
-                    <p class='card-text'><strong>Description:</strong> ${description}</p>
-                `;
-
-                weatherCard.appendChild(weatherCardHeader);
-                weatherCard.appendChild(weatherCardBody);
-                weatherInfo.appendChild(weatherCard);
-
-                const weatherContainer = document.querySelector("#weather-container");
-                weatherContainer.appendChild(weatherInfo);
-            } else {
-                console.log("Unable to fetch weather information.");
-            }
-        })
-        .catch(error => console.error(error));
-}
-
-    document.addEventListener("DOMContentLoaded", getLocation);
-</script>
 
 </body>
 

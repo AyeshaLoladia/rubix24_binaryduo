@@ -1,10 +1,10 @@
  <!-- Sidebar -->
- <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #a02929">
+ <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #1d3892">
 
 <!-- Sidebar - Brand -->
 <a class="sidebar-brand d-flex align-items-center justify-content-left" href="index.html">
    
-    <div class="sidebar-brand-text mx-3"> <img src="" class="kjsitlogo" style="widht:60px;height:60px"></img></div>
+    <div class="sidebar-brand-text mx-3"> <img src="../images/logo.png" class="kjsitlogo" style="width:100px;height:100px"></img></div>
 </a>
 <!-- Divider -->
 <hr class="sidebar-divider my-0">

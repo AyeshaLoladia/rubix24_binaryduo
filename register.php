@@ -23,7 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $target_dir = 'uploads/'; // Update this path to the correct relative path from your PHP file
             $target_file = $target_dir . basename($_FILES['profile_picture']['name']);
             move_uploaded_file($_FILES['profile_picture']['tmp_name'], $target_file);
-            $profile_picture = $target_file;
+
+            // Add '../' to the beginning of the profile picture path
+            $profile_picture = '../' . $target_file;
         }
 
         // Insert user data into the database

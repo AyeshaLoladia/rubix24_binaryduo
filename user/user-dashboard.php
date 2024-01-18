@@ -1,7 +1,26 @@
 <?php
 session_start();
 // Include database connection file (db_connection.php)
-include('db_connection.php');
+include('../db_connection.php');
+
+// Check if the admin is logged in
+if (!isset($_SESSION["username"])) {
+    // Redirect to the login page if not logged in
+    header("Location: ../login.php");
+    exit();
+}
+
+
+// Check if the admin is logged in
+if (!isset($_SESSION["profile_picture"])) {
+    // Redirect to the login page if not logged in
+    header("Location: ../login.php");
+    exit();
+}
+
+// Get the admin's username from the session
+$username = $_SESSION["username"];
+$profile_picture = $_SESSION["profile_picture"];
 
 // Retrieve announcements from the database
 $sqlAnnouncements = "SELECT * FROM announcements ORDER BY created_at DESC LIMIT 5";
@@ -114,6 +133,10 @@ $conn->close();
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <!-- Favicons -->
+  <link href="../images/logo.png" rel="icon">
+  <link href="../images/logo.png" rel="apple-touch-icon">
+
     <title>Community Member</title>
 
     <!-- Custom fonts for this template-->
@@ -123,7 +146,7 @@ $conn->close();
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
    
 
@@ -148,12 +171,12 @@ $conn->close();
                 <?php include('topbar.php'); ?>
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid logo-bg">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Welcome
-                            <?php echo $_SESSION['username']; ?>
+                            <?php echo $username ?>
                         </h1>
                        
                     </div>
@@ -410,7 +433,7 @@ $conn->close();
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="../login.php">Logout</a>
                 </div>
             </div>
         </div>
