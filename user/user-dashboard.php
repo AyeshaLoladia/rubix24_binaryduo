@@ -1,8 +1,110 @@
+<?php
+session_start();
+// Include database connection file (db_connection.php)
+include('db_connection.php');
 
+// Retrieve announcements from the database
+$sqlAnnouncements = "SELECT * FROM announcements ORDER BY created_at DESC LIMIT 5";
+$resultAnnouncements = $conn->query($sqlAnnouncements);
+
+// Retrieve upcoming events or activities from the hypothetical events table
+$sqlCommunityEvents = "SELECT * FROM communityevents WHERE start_date >= CURDATE() ORDER BY start_date LIMIT 5";
+$resultCommunityEvents = $conn->query($sqlCommunityEvents);
+
+// Close the database connection
+$conn->close();
+?>
 
 
 <!DOCTYPE html>
 <html lang="en">
+
+
+
+
+ <!-- Custom CSS -->
+ <style>
+        body {
+            font-family: 'Nunito', sans-serif;
+            background-color: #f5f5f5;
+        }
+
+        .bg-primary-light {
+            background-color: #e5ecf6;
+        }
+
+        .text-gray-800 {
+            color: #343a40 !important;
+        }
+
+        .border-bottom {
+            border-bottom: 1px solid #e5e5e5;
+        }
+
+        .rounded-pill {
+            border-radius: 50rem !important;
+        }
+
+        .card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+        }
+
+        .card-header {
+            background-color: #e5ecf6;
+            border-radius: 1rem 1rem 0 0;
+            padding: 1.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-text {
+            margin-bottom: 1.5rem;
+        }
+
+        .mb-3,
+        .my-3 {
+            margin-bottom: 1.5rem !important;
+        }
+
+        .mt-4,
+        .my-4 {
+            margin-top: 2.5rem !important;
+        }
+
+        .me-4,
+        .mx-4 {
+            margin-right: 1.5rem !important;
+        }
+
+        .pe-4,
+        .px-4 {
+            padding-right: 1.5rem !important;
+        }
+
+        .fs-4 {
+            font-size: 1.5rem;
+        }
+
+        .text-muted {
+            color: #6c757d !important;
+        }
+
+        @media (min-width: 992px) {
+            .col-lg-3 {
+                flex: 0 0 25%;
+                max-width: 25%;
+            }
+        }
+    </style>
 
 <head>
 
@@ -12,7 +114,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Admin Panel</title>
+    <title>Community Member</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -23,6 +125,8 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
+   
+
 </head>
 
 <body id="page-top">
@@ -30,130 +134,8 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
-        <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #a02929">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-left" href="index.html">
-               
-                <div class="sidebar-brand-text mx-3"> <img src="img\kjsitel_white.png" class="kjsitlogo" style="widht:60px;height:60px"></img></div>
-            </a>
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="index.html">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard Overview</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Manage</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                       
-                        <a class="collapse-item" href="manage-courses.php">Courses</a>
-                        <a class="collapse-item" href="manage-faculty.php">Faculties</a>
-                        <a class="collapse-item" href="manage-students.php">Students</a>
-                    </div>
-                </div>
-            </li>
-
-            <!-- Nav Item - Utilities Collapse Menu 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                    data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
-                    </div>
-                </div>
-            </li> -->
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Others
-            </div>
-
-            <!-- Nav Item - Pages Collapse Menu 
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
-                    aria-expanded="true" aria-controls="collapsePages">
-                    <i class="fas fa-fw fa-folder"></i>
-                    <span>Others</span>
-                </a>
-                <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Login Screens:</h6>
-                        <a class="collapse-item" href="login.html">Login</a>
-                        <a class="collapse-item" href="register.html">Register</a>
-                        <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                        <div class="collapse-divider"></div>
-                        <h6 class="collapse-header">Other Pages:</h6>
-                        <a class="collapse-item" href="404.html">404 Page</a>
-                        <a class="collapse-item" href="blank.html">Blank Page</a>
-                    </div>
-                </div>
-            </li> -->
-
-            <!-- Nav Item - Charts -->
-            <li class="nav-item">
-                <a class="nav-link" href="charts.html">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Content Moderation</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>View analytics</span></a>
-            </li>
-
-            <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="tables.html">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Feedback management</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-            <!-- Sidebar Message 
-            <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
-                <p class="text-center mb-2"><strong>SB Admin Pro</strong> is packed with premium features, components, and more!</p>
-                <a class="btn btn-success btn-sm" href="https://startbootstrap.com/theme/sb-admin-pro">Upgrade to Pro!</a>
-            </div> -->
-
-        </ul>
-        <!-- End of Sidebar -->
+        <!-- Include the sidebar -->
+        <?php include('sidebar.php'); ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -161,531 +143,231 @@
             <!-- Main Content -->
             <div id="content">
 
-                <!-- Topbar -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-                        <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-search fa-fw"></i>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
-                                <form class="form-inline mr-auto w-100 navbar-search">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-primary" type="button">
-                                                <i class="fas fa-search fa-sm"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Alerts -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
-                                <!-- Counter - Alerts -->
-                                <span class="badge badge-danger badge-counter">3+</span>
-                            </a>
-                            <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Alerts Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-primary">
-                                            <i class="fas fa-file-alt text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-success">
-                                            <i class="fas fa-donate text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 7, 2019</div>
-                                        $290.29 has been deposited into your account!
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-exclamation-triangle text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <div class="small text-gray-500">December 2, 2019</div>
-                                        Spending Alert: We've noticed unusually high spending for your account.
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                            </div>
-                        </li>
-
-                        <!-- Nav Item - Messages -->
-                        <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-envelope fa-fw"></i>
-                                <!-- Counter - Messages -->
-                                <span class="badge badge-danger badge-counter">7</span>
-                            </a>
-                            <!-- Dropdown - Messages -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="messagesDropdown">
-                                <h6 class="dropdown-header">
-                                    Message Center
-                                </h6>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div class="font-weight-bold">
-                                        <div class="text-truncate">Hi there! I am wondering if you can help me with a
-                                            problem I've been having.</div>
-                                        <div class="small text-gray-500">Emily Fowler · 58m</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_2.svg"
-                                            alt="...">
-                                        <div class="status-indicator"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">I have the photos that you ordered last month, how
-                                            would you like them sent to you?</div>
-                                        <div class="small text-gray-500">Jae Chun · 1d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_3.svg"
-                                            alt="...">
-                                        <div class="status-indicator bg-warning"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Last month's report looks great, I am very happy with
-                                            the progress so far, keep up the good work!</div>
-                                        <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item d-flex align-items-center" href="#">
-                                    <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
-                                            alt="...">
-                                        <div class="status-indicator bg-success"></div>
-                                    </div>
-                                    <div>
-                                        <div class="text-truncate">Am I a good boy? The reason I ask is because someone
-                                            told me that people say this to all dogs, even if they aren't good...</div>
-                                        <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                                    </div>
-                                </a>
-                                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
-                            </div>
-                        </li>
-
-                        <div class="topbar-divider d-none d-sm-block"></div>
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo $admin_username; ?></span>
-                                <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
-                <!-- End of Topbar -->
+                <!-- Include the topbar -->
+                <?php include('topbar.php'); ?>
 
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Dashboard Overview</h1>
-                        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm" style="background-color: #a02929"><i
-                                class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
+                        <h1 class="h3 mb-0 text-gray-800">Welcome
+                            <?php echo $_SESSION['username']; ?>
+                        </h1>
+                       
                     </div>
 
-                    <!-- Content Row -->
+                    
                     <div class="row">
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4" >
-                            <div class="card border-left-primary shadow h-100 py-2">
+ <!-- Announcements -->
+ <div class="col-lg-6 mb-4">
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Announcements</h4>
+                                </div>
                                 <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2" >
-                                            <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                Total Faculties</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $total_faculty; ?></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
+                                    <?php while ($announcement = $resultAnnouncements->fetch_assoc()): ?>
+                                        <p class="card-text"><?php echo $announcement['title']; ?></p>
+                                        <p class="card-text"><?php echo $announcement['content']; ?></p>
+                                    <?php endwhile; ?>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-success shadow h-100 py-2">
-                                <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                Total Students</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $total_students; ?></div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
+                        <!-- Community Events -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Community Events</h4>
                                 </div>
-                            </div>
-                        </div>
-
-                        <!-- Earnings (Monthly) Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-info shadow h-100 py-2">
                                 <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total Courses
-                                            </div>
-                                            <div class="row no-gutters align-items-center">
-                                                <div class="col-auto">
-                                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800"><?php echo $total_courses; ?></div>
-                                                </div>
-                                               
+                                    <?php while ($event = $resultCommunityEvents->fetch_assoc()): ?>
+                                        <div class="card mb-3">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><?php echo $event['title']; ?></h5>
+                                                <p class="card-text"><?php echo $event['description']; ?></p>
+                                                <p class="card-text"><?php echo $event['location']; ?></p>
+                                                <p class="card-text"><strong>Start Date:</strong>
+                                                    <?php echo date('M d, Y', strtotime($event['start_date'])); ?></p>
+                                                <p class="card-text"><strong>End Date:</strong>
+                                                    <?php echo date('M d, Y', strtotime($event['end_date'])); ?></p>
                                             </div>
                                         </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
+                                    <?php endwhile; ?>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Pending Requests Card Example -->
-                        <div class="col-xl-3 col-md-6 mb-4">
-                            <div class="card border-left-warning shadow h-100 py-2">
+                        <!-- Weather Information -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Weather Information</h4>
+                                </div>
                                 <div class="card-body">
-                                    <div class="row no-gutters align-items-center">
-                                        <div class="col mr-2">
-                                            <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                Pending Requests</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
-                                        </div>
-                                        <div class="col-auto">
-                                            <i class="fas fa-comments fa-2x text-gray-300"></i>
-                                        </div>
-                                    </div>
+                                    <!-- Weather Information -->
+<div class="col-lg-6 mb-4">
+    <div class="card bg-primary-light">
+        <div class="card-header">
+            <h4 class="card-title text-gray-800">Weather Information</h4>
+        </div>
+        
+    </div>
+</div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Content Row -->
-
-                    <div class="row">
-
-                        <!-- Area Chart -->
-                        <div class="col-xl-8 col-lg-7">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Usage Overview</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
+                        <!-- Quick Links -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Quick Links</h4>
                                 </div>
-                                <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-area">
-                                        <canvas id="myAreaChart"></canvas>
-                                    </div>
+                                    <!-- Quick links content -->
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Pie Chart -->
-                        <div class="col-xl-4 col-lg-5">
-                            <div class="card shadow mb-4">
-                                <!-- Card Header - Dropdown -->
-                                <div
-                                    class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                    <h6 class="m-0 font-weight-bold text-primary">Usage Sources</h6>
-                                    <div class="dropdown no-arrow">
-                                        <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
-                                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                                            aria-labelledby="dropdownMenuLink">
-                                            <div class="dropdown-header">Dropdown Header:</div>
-                                            <a class="dropdown-item" href="#">Action</a>
-                                            <a class="dropdown-item" href="#">Another action</a>
-                                            <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="#">Something else here</a>
-                                        </div>
-                                    </div>
+                        <!-- Community Engagement -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Community Engagement</h4>
                                 </div>
-                                <!-- Card Body -->
                                 <div class="card-body">
-                                    <div class="chart-pie pt-4 pb-2">
-                                        <canvas id="myPieChart"></canvas>
-                                    </div>
-                                    <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> CS
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> EXTC
-                                        </span>
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> AI-DS
-                                        </span>
-                                    </div>
+                                    <!-- Community engagement content from PHP -->
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <!-- Content Row -->
-                    <div class="row">
+                        <!-- Interactive Widgets -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Interactive Widgets</h4>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Interactive widgets content from PHP -->
+                                </div>
+                            </div>
+                        </div>
 
-                        <!-- Content Column -->
+                        <!-- Latest News and Research -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Latest News and Research</h4>
+                                </div>
+                                <div class="card-body">
+                                    <!-- News and research content from PHP -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Success Stories/Testimonials -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Success Stories/Testimonials</h4>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Success stories content from PHP -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Social Media Integration -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Social Media Integration</h4>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Social media content from PHP -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Community Alerts -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Community Alerts</h4>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Community alerts content from PHP -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Volunteer Opportunities -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Volunteer Opportunities</h4>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Volunteer opportunities content from PHP -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Community Spotlight -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Community Spotlight</h4>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Community spotlight content from PHP -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Polls and Surveys -->
+                        <div class="col-lg-6 mb-4">
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Polls and Surveys</h4>
+                                </div>
+                                <div class="card-body">
+                                    <!-- Polls and surveys content from PHP -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Community Statistics -->
                         <div class="col-lg-6 mb-4">
 
-                            <!-- Project Card Example -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Courses</h6>
+```p>
+
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Community Statistics</h4>
                                 </div>
                                 <div class="card-body">
-                                    <h4 class="small font-weight-bold">Theory of Computation <span
-                                            class="float-right">20%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 20%"
-                                            aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Data warehousing and mining <span
-                                            class="float-right">40%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 40%"
-                                            aria-valuenow="40" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Data structures <span
-                                            class="float-right">60%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar" role="progressbar" style="width: 60%"
-                                            aria-valuenow="60" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Operating systems <span
-                                            class="float-right">80%</span></h4>
-                                    <div class="progress mb-4">
-                                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%"
-                                            aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                    <h4 class="small font-weight-bold">Computer Networks <span
-                                            class="float-right">100%</span></h4>
-                                    <div class="progress">
-                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%"
-                                            aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
+                                    <!-- Community statistics content from PHP -->
                                 </div>
                             </div>
-
-                            <!-- Color System -->
-                            <div class="row">
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-primary text-white shadow">
-                                        <div class="card-body">
-                                            Primary
-                                            <div class="text-white-50 small">#4e73df</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-success text-white shadow">
-                                        <div class="card-body">
-                                            Success
-                                            <div class="text-white-50 small">#1cc88a</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-info text-white shadow">
-                                        <div class="card-body">
-                                            Info
-                                            <div class="text-white-50 small">#36b9cc</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-warning text-white shadow">
-                                        <div class="card-body">
-                                            Warning
-                                            <div class="text-white-50 small">#f6c23e</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-danger text-white shadow">
-                                        <div class="card-body">
-                                            Danger
-                                            <div class="text-white-50 small">#e74a3b</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-secondary text-white shadow">
-                                        <div class="card-body">
-                                            Secondary
-                                            <div class="text-white-50 small">#858796</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-light text-black shadow">
-                                        <div class="card-body">
-                                            Light
-                                            <div class="text-black-50 small">#f8f9fc</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-6 mb-4">
-                                    <div class="card bg-dark text-white shadow">
-                                        <div class="card-body">
-                                            Dark
-                                            <div class="text-white-50 small">#5a5c69</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
                         </div>
 
+                        <!-- Feedback Mechanism -->
                         <div class="col-lg-6 mb-4">
-
-                            <!-- Illustrations -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Upcoming Events</h6>
+                            <div class="card bg-primary-light">
+                                <div class="card-header">
+                                    <h4 class="card-title text-gray-800">Feedback Mechanism</h4>
                                 </div>
                                 <div class="card-body">
-                                    <div class="text-center">
-                                        <img class="img-fluid px-3 px-sm-4 mt-3 mb-4" style="width: 25rem;"
-                                            src="img/undraw_posting_photo.svg" alt="...">
-                                    </div>
-                                    <p>Add some quality, svg illustrations to your project courtesy of <a
-                                            target="_blank" rel="nofollow" href="https://undraw.co/">unDraw</a>, a
-                                        constantly updated collection of beautiful svg images that you can use
-                                        completely free and without attribution!</p>
-                                    <a target="_blank" rel="nofollow" href="https://undraw.co/">Browse Illustrations on
-                                        unDraw &rarr;</a>
+                                    <!-- Feedback mechanism content from PHP -->
                                 </div>
                             </div>
-
-                            <!-- Approach -->
-                            <div class="card shadow mb-4">
-                                <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Recent Activities</h6>
-                                </div>
-                                <div class="card-body">
-                                    <p>SB Admin 2 makes extensive use of Bootstrap 4 utility classes in order to reduce
-                                        CSS bloat and poor page performance. Custom CSS classes are used to create
-                                        custom components and custom utility classes.</p>
-                                    <p class="mb-0">Before working with this theme, you should become familiar with the
-                                        Bootstrap framework, especially the utility classes.</p>
-                                </div>
-                            </div>
-
                         </div>
-                    </div>
+
+</div>
+                    
 
                 </div>
                 <!-- /.container-fluid -->
@@ -750,6 +432,63 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+
+
+    <script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(fetchWeather);
+        } else {
+            console.log("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function fetchWeather(position) {
+    const lat = position.coords.latitude;
+    const lon = position.coords.longitude;
+    const apiKey = "31e3ee80db08af5463e81226fc175207";
+    const url = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.cod == 200) {
+                const temp = data.main.temp;
+                const description = ucfirst(data.weather[0].description);
+                const locationName = data.name;
+
+                const weatherInfo = document.createElement("div");
+                weatherInfo.classList.add("col-lg-6", "mb-4");
+
+                const weatherCard = document.createElement("div");
+                weatherCard.classList.add("card", "bg-primary-light");
+
+                const weatherCardHeader = document.createElement("div");
+                weatherCardHeader.classList.add("card-header");
+                weatherCardHeader.innerHTML = `<h4 class="card-title text-gray-800">Weather Information for ${locationName}</h4>`;
+
+                const weatherCardBody = document.createElement("div");
+                weatherCardBody.classList.add("card-body");
+                weatherCardBody.innerHTML = `
+                    <p class='card-text'><strong>Temperature:</strong> ${temp}°C</p>
+                    <p class='card-text'><strong>Description:</strong> ${description}</p>
+                `;
+
+                weatherCard.appendChild(weatherCardHeader);
+                weatherCard.appendChild(weatherCardBody);
+                weatherInfo.appendChild(weatherCard);
+
+                const weatherContainer = document.querySelector("#weather-container");
+                weatherContainer.appendChild(weatherInfo);
+            } else {
+                console.log("Unable to fetch weather information.");
+            }
+        })
+        .catch(error => console.error(error));
+}
+
+    document.addEventListener("DOMContentLoaded", getLocation);
+</script>
 
 </body>
 
