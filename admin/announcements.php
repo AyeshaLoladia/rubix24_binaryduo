@@ -3,6 +3,7 @@ session_start();
 // Include database connection file (db_connection.php)
 include('../db_connection.php');
 
+
 // Check if the admin is logged in
 if (!isset($_SESSION["username"])) {
     // Redirect to the login page if not logged in
@@ -22,8 +23,6 @@ if (!isset($_SESSION["profile_picture"])) {
 $username = $_SESSION["username"];
 $profile_picture = $_SESSION["profile_picture"];
 
-// Close the database connection
-$conn->close();
 ?>
 
 
@@ -35,9 +34,6 @@ $conn->close();
 
 
 <head>
-     <!-- Favicons -->
-  <link href="../images/logo.png" rel="icon">
-  <link href="../images/logo.png" rel="apple-touch-icon">
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -45,7 +41,10 @@ $conn->close();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Representative</title>
+    <title>Admin</title>
+     <!-- Favicons -->
+     <link href="../images/logo.png" rel="icon">
+    <link href="../images/logo.png" rel="apple-touch-icon">
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -79,23 +78,23 @@ $conn->close();
                 <?php include('topbar.php'); ?>
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid bg-logo">
+                <div class="container-fluid">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Welcome
-                            <?php echo $username; ?>
+                        <h1 class="h3 mb-0 text-gray-800">Announcements
                         </h1>
                        
                     </div>
 
                     
                     <div class="row">
- 
+                   
+                    </div>
+                    
 
                 </div>
                 <!-- /.container-fluid -->
-</div>
 
             </div>
             <!-- End of Main Content -->
@@ -135,7 +134,7 @@ $conn->close();
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="../login.php">Logout</a>
+                    <a class="btn btn-primary" href="login.php">Logout</a>
                 </div>
             </div>
         </div>
@@ -151,14 +150,9 @@ $conn->close();
     <!-- Custom scripts for all pages-->
     <script src="js/sb-admin-2.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo.js"></script>
-    <script src="js/demo/chart-pie-demo.js"></script>
 
 
+   
 
 </body>
 

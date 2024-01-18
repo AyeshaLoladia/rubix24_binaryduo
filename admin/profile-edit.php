@@ -1,17 +1,18 @@
 <?php
-// Include database connection file (db_connection.php)
-include('db_connection.php');
+require_once('../db_connection.php');
 
-// Assume you have a user ID stored in the session
+// Assuming you have a user ID stored in the session
 $user_id = $_POST['user_id'];
-$username = $_POST['username'];
-$email = $_POST['email'];
-$contact_details = $_POST['$contact_details'];
+
+// Validate and sanitize user input
+$username = $conn->real_escape_string($_POST['username']);
+$email = $conn->real_escape_string($_POST['email']);
+$contact_details = $conn->real_escape_string($_POST['contact_details']);
 
 // Handle profile picture upload
-$profile_picture = ''; // Initialize an empty string for the profile picture path
- // Handle profile picture upload
- if ($_FILES['profile_picture']['error'] == 0) {
+$profile_picture = '';
+// Handle profile picture upload
+if ($_FILES['profile_picture']['error'] == 0) {
     $target_dir = 'uploads/'; // Update this path to the correct relative path from your PHP file
     $target_file = $target_dir . basename($_FILES['profile_picture']['name']);
     move_uploaded_file($_FILES['profile_picture']['tmp_name'], $target_file);
@@ -21,22 +22,21 @@ $profile_picture = ''; // Initialize an empty string for the profile picture pat
 }
 
 // Update user data in the database
-$sql = "UPDATE users SET username='$username', email='$email', profile_picture='$profile_picture', contact_details='$contact_details'   WHERE user_id='$user_id'";
+$sql = "UPDATE users SET username='$username', email='$email', profile_picture='$profile_picture', contact_details='$contact_details' WHERE user_id='$user_id'";
 
 if ($conn->query($sql) === TRUE) {
     // Profile update successful
     echo "Profile updated successfully! Redirecting to profile page...";
-    
+
     // Redirect to the profile page after a brief delay (2 seconds in this example)
     header("refresh:2;url=profile.php");
-    exit();
+    exit;
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
 $conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -55,7 +55,7 @@ $conn->close();
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <h2>Edit Profile</h2>
-                <form action="update_profile.php" method="post" enctype="multipart/form-data">
+                <form action="profile-edit.php" method="post" enctype="multipart/form-data">
                     <!-- Assume you have a user ID stored in the session -->
                     <input type="hidden" name="user_id" value="<?php echo $_SESSION['user_id']; ?>" readonly>
                     <div class="mb-3">

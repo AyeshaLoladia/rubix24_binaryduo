@@ -1,5 +1,31 @@
 
+<?php
+session_start();
+// Include database connection file (db_connection.php)
+include('../db_connection.php');
 
+
+// Check if the admin is logged in
+if (!isset($_SESSION["username"])) {
+    // Redirect to the login page if not logged in
+    header("Location: ../login.php");
+    exit();
+}
+
+
+// Check if the admin is logged in
+if (!isset($_SESSION["profile_picture"])) {
+    // Redirect to the login page if not logged in
+    header("Location: ../login.php");
+    exit();
+}
+
+// Get the admin's username from the session
+$username = $_SESSION["username"];
+$profile_picture = $_SESSION["profile_picture"];
+
+
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,8 +51,10 @@
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+ <!-- Favicons -->
+ <link href="../images/logo.png" rel="icon">
+    <link href="../images/logo.png" rel="apple-touch-icon">
    
 
 </head>
@@ -50,11 +78,11 @@
                 <?php include('topbar.php'); ?>
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid bg-logo">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Users List
+                        <h1 class="h3 mb-0 text-gray-800">Incidents List
                         </h1>
                        
                     </div>
@@ -62,7 +90,14 @@
                     
                     <div class="row">
                   <!-- Incident Table -->
-        <table class="table table-bordered">
+                   <!-- DataTables Example -->
+                   <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">All incidents</h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -75,7 +110,7 @@
             <tbody>
                 <?php
                 // Database connection
-                include('db_connection.php');
+                include('../db_connection.php');
 
                 // Fetch incidents from the database
                 $sql = "SELECT * FROM incidents";
@@ -89,7 +124,7 @@
                         echo "<td>" . $row["description"] . "</td>";
 echo "<td>" . $row["location"] . "</td>";
 echo "<td>" . $row["date"] . "</td>";
-echo "<td><img src='" . $row["image"] . "' alt='Incident Image' width='150'></td>";
+echo "<td><a href='" . $row["image"] . "' target='_blank'><img src='" . $row["image"] . "' alt='Incident Image' width='150'></a></td>";
                       
                         echo "</tr>";
                     }
@@ -104,7 +139,7 @@ echo "<td><img src='" . $row["image"] . "' alt='Incident Image' width='150'></td
         </table>
                     </div>
                     
-
+                        </div></div></div></div></div>
                 </div>
                 <!-- /.container-fluid -->
 

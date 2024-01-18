@@ -1,14 +1,33 @@
 <?php
 session_start();
 // Include database connection file (db_connection.php)
-include('db_connection.php');
+include('../db_connection.php');
+
+
+// Check if the admin is logged in
+if (!isset($_SESSION["username"])) {
+    // Redirect to the login page if not logged in
+    header("Location: ../login.php");
+    exit();
+}
+
+
+// Check if the admin is logged in
+if (!isset($_SESSION["profile_picture"])) {
+    // Redirect to the login page if not logged in
+    header("Location: ../login.php");
+    exit();
+}
+
+// Get the admin's username from the session
+$username = $_SESSION["username"];
+$profile_picture = $_SESSION["profile_picture"];
 
 // Fetch community members data from the database
 $community_members_result = $conn->query("SELECT * FROM users WHERE role = 'Community Member'");
 
 // Fetch NGO Gram/Panchayat representatives data from the database
-$ngo_representatives_result = $conn->query("SELECT * FROM users WHERE role = 'NGO/Gram Panchayat Representative
-'");
+$ngo_representatives_result = $conn->query("SELECT * FROM users WHERE role = 'NGO/Gram Panchayat Representative' ");
 
 
 // Close the database connection
@@ -32,6 +51,9 @@ $conn->close();
     <meta name="author" content="">
 
     <title>Admin</title>
+     <!-- Favicons -->
+     <link href="../images/logo.png" rel="icon">
+    <link href="../images/logo.png" rel="apple-touch-icon">
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -40,7 +62,7 @@ $conn->close();
         rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
 
    
 
@@ -65,7 +87,7 @@ $conn->close();
                 <?php include('topbar.php'); ?>
 
                 <!-- Begin Page Content -->
-                <div class="container-fluid">
+                <div class="container-fluid bg-logo">
 
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">

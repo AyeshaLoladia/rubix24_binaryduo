@@ -2,7 +2,7 @@
  <ul class="navbar-nav sidebar sidebar-dark accordion" id="accordionSidebar" style="background-color: #1d3892">
 
 <!-- Sidebar - Brand -->
-<a class="sidebar-brand d-flex align-items-center justify-content-left" href="index.html">
+<a class="sidebar-brand d-flex align-items-center justify-content-left" href="../index.html">
    
     <div class="sidebar-brand-text mx-3"> <img src="../images/logo.png" class="kjsitlogo" style="width:100px;height:100px"></img></div>
 </a>
@@ -30,8 +30,7 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                        
                         <a class="collapse-item" href="user-list.php">User List</a>
-                        <a class="collapse-item" href="edit-profile.php">Edit Profiles</a>
-                        <a class="collapse-item" href="user-activity.php">User Activity Logs</a>
+                        <a class="collapse-item" href="delete-user.php">Delete Users</a>
                     </div>
                 </div>
             </li>
@@ -46,9 +45,9 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                        
-                        <a class="collapse-item" href="#">Static Content</a>
-                        <a class="collapse-item" href="#">Announcements</a>
-                        <a class="collapse-item" href="#">Events</a>
+                        <a class="collapse-item" href="projects.php">Projects</a>
+                        <a class="collapse-item" href="announcements.php">Announcements</a>
+                        
                     </div>
                 </div>
             </li>
@@ -81,12 +80,7 @@
         <span>Incident Reports</span></a>
 </li>
 
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="#">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Analytics</span></a>
-</li>
+
 
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">

@@ -29,9 +29,8 @@
                 <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                        
-                        <a class="collapse-item" href="">Project List</a>
-                        <a class="collapse-item" href="">Create Project</a>
-                        <a class="collapse-item" href="">Edit Project</a>
+                        <a class="collapse-item" href="project-list.php">Project List</a>
+                        <a class="collapse-item" href="create-project.php">Create Project</a>
                     </div>
                 </div>
             </li>
