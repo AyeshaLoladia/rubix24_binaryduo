@@ -29,12 +29,7 @@
         <span>Education & Awareness</span></a>
 </li>
 
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="community_forum.php">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Community Engagement</span></a>
-</li>
+
 
 
 <!-- Nav Item - Tables -->
@@ -44,19 +39,6 @@
         <span>Incident Reporting</span></a>
 </li>
 
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Hygiene & Health</span></a>
-</li>
-
-<!-- Nav Item - Tables -->
-<li class="nav-item">
-    <a class="nav-link" href="tables.html">
-        <i class="fas fa-fw fa-table"></i>
-        <span>Sustainable Practices</span></a>
-</li>
 
 <!-- Divider -->
 <hr class="sidebar-divider d-none d-md-block">

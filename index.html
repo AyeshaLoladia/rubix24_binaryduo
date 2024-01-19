@@ -50,43 +50,8 @@
     display: block;
 }
  </style>
-</head>
 
-<body>
-
-  <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top ">
-    <div class="container d-flex align-items-center justify-content-lg-between">
-      <div id="language-selector-container">
-        <select id="language-selector" onchange="changeLanguage()">
-            <option value="en">English</option>
-            <option value="hn">हिंदी</option>
-            <!-- Add more language options as needed -->
-        </select>
-    </div>
-      <h1 id="text20" class="logo me-auto me-lg-0"><a href="index.html">BlueCatalyst<span>.</span></a></h1> 
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="images/logo.png" alt="" class="img-fluid"></a> -->
-
-      <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
-          <li id="text13"><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li id="text14"><a class="nav-link scrollto" href="#about">About</a></li>
-          <li id="text15"><a class="nav-link scrollto" href="#services">Services</a></li>
-      
-          <li id="text17"><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li id="text18"><a class="nav-link scrollto" href="#contact">Contact</a></li>
-        </ul>
-        <i id="text19" class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-      <a id="text21" href="login.php" class="get-started-btn scrollto">Get Started</a>
-
-    </div>
-  </header><!-- End Header -->
-
-
-
+ 
 <script>
   function changeLanguage() {
       var selectedLanguage = document.getElementById('language-selector').value;
@@ -115,8 +80,8 @@
       document.getElementById('text15').textContent = languageData.text15;
       document.getElementById('text16').textContent = languageData.text16;
      
+      document.getElementById('text17').textContent = languageData.text17;
       document.getElementById('text18').textContent = languageData.text18;
-      document.getElementById('text19').textContent = languageData.text19;
       document.getElementById('text20').textContent = languageData.text20;
       document.getElementById('text21').textContent = languageData.text21;
 
@@ -130,6 +95,43 @@
   // For simplicity, we'll default to English
   changeLanguage();
 </script>
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top ">
+    <div class="container d-flex align-items-center justify-content-lg-between">
+      <div id="language-selector-container">
+        <select id="language-selector" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="hn">हिंदी</option>
+            <!-- Add more language options as needed -->
+        </select>
+    </div>
+      <h1 id="text20" class="logo me-auto me-lg-0"><a href="index.html">BlueCatalyst<span>.</span></a></h1> 
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="images/logo.png" alt="" class="img-fluid"></a> -->
+
+      <nav id="navbar" class="navbar order-last order-lg-0">
+        <ul>
+          <li id="text14"><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li id="text15"><a class="nav-link scrollto" href="#about">About</a></li>
+          <li id="text16"><a class="nav-link scrollto" href="#services">Services</a></li>
+      
+          <li id="text17"><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li id="text18"><a class="nav-link scrollto" href="#contact">Contact</a></li>
+        </ul>
+        <i  class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+      <a id="text21" href="login.php" class="get-started-btn scrollto">Get Started</a>
+
+    </div>
+  </header><!-- End Header -->
+
+
+
 
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center justify-content-center">
