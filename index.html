@@ -57,34 +57,34 @@
   <!-- ======= Header ======= -->
   <header id="header" class="fixed-top ">
     <div class="container d-flex align-items-center justify-content-lg-between">
-
-      <h1 class="logo me-auto me-lg-0"><a href="index.html">BlueCatalyst<span>.</span></a></h1> 
+      <div id="language-selector-container">
+        <select id="language-selector" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="hn">हिंदी</option>
+            <!-- Add more language options as needed -->
+        </select>
+    </div>
+      <h1 id="text20" class="logo me-auto me-lg-0"><a href="index.html">BlueCatalyst<span>.</span></a></h1> 
       <!-- Uncomment below if you prefer to use an image logo -->
       <!-- <a href="index.html" class="logo me-auto me-lg-0"><img src="images/logo.png" alt="" class="img-fluid"></a> -->
 
       <nav id="navbar" class="navbar order-last order-lg-0">
         <ul>
-          <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-          <li><a class="nav-link scrollto" href="#about">About</a></li>
-          <li><a class="nav-link scrollto" href="#services">Services</a></li>
-          <li><a class="nav-link scrollto " href="#portfolio">Portfolio</a></li>
-          <li><a class="nav-link scrollto" href="#team">Team</a></li>
-          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+          <li id="text13"><a class="nav-link scrollto active" href="#hero">Home</a></li>
+          <li id="text14"><a class="nav-link scrollto" href="#about">About</a></li>
+          <li id="text15"><a class="nav-link scrollto" href="#services">Services</a></li>
+      
+          <li id="text17"><a class="nav-link scrollto" href="#team">Team</a></li>
+          <li id="text18"><a class="nav-link scrollto" href="#contact">Contact</a></li>
         </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
+        <i id="text19" class="bi bi-list mobile-nav-toggle"></i>
       </nav><!-- .navbar -->
 
-      <a href="login.php" class="get-started-btn scrollto">Get Started</a>
+      <a id="text21" href="login.php" class="get-started-btn scrollto">Get Started</a>
 
     </div>
   </header><!-- End Header -->
-  <div id="language-selector-container">
-    <select id="language-selector" onchange="changeLanguage()">
-        <option value="en">English</option>
-        <option value="hn">हिंदी</option>
-        <!-- Add more language options as needed -->
-    </select>
-</div>
+
 
 
 <script>
@@ -110,6 +110,15 @@
       document.getElementById('text10').textContent = languageData.text10;
       document.getElementById('text11').textContent = languageData.text11;
       document.getElementById('text12').textContent = languageData.text12;
+      document.getElementById('text13').textContent = languageData.text13;
+      document.getElementById('text14').textContent = languageData.text14;
+      document.getElementById('text15').textContent = languageData.text15;
+      document.getElementById('text16').textContent = languageData.text16;
+     
+      document.getElementById('text18').textContent = languageData.text18;
+      document.getElementById('text19').textContent = languageData.text19;
+      document.getElementById('text20').textContent = languageData.text20;
+      document.getElementById('text21').textContent = languageData.text21;
 
       // Update other elements as needed
 
@@ -584,7 +593,7 @@
 
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong><span>Gp</span></strong>. All Rights Reserved
+        &copy; Copyright <strong><span>BlueCatalyst</span></strong>. All Rights Reserved
       </div>
       <div class="credits">
         <!-- All the links in the footer should remain intact. -->
